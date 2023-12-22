@@ -1,0 +1,11 @@
+{
+  "name": "codieal_project",
+  "version": "1.0.0",
+  "description": "pratice project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tushar Swami",
+  "license": "ISC"
+}
