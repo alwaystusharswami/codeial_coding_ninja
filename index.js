@@ -11,14 +11,15 @@ const expressLayout = require("express-ejs-layouts");
 
 const app = express();
 
-// middle ware
-app.use(expressLayout);
-app.use(express.urlencoded());
-app.use(cookieParser());
+
 
 // set view engine
 app.set("view engine", "ejs");
 app.set("views", "views");
+// middle ware
+app.use(expressLayout);
+app.use(express.urlencoded({extended:false}));
+app.use(cookieParser());
 
 // passport session
 app.use(
@@ -32,8 +33,10 @@ app.use(
     },
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
+// app.use(passport.setAuthenticatedUser);
 // router calling
 app.use("/", require("./routes"));
 

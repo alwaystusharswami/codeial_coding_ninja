@@ -21,15 +21,27 @@ passport.use(
   )
 );
 
-// serilizing the user to decide which key is to be kept in cookies 
-passport.serializeUser(function(user,done){
-    done(null,user.id);
-})
+// serilizing the user to decide which key is to be kept in cookies
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
 
-// deserilize the user from the key in the cookies 
-passport.deserializeUser(async function(id,done){
-    const user=await User.findById(id);
-    return done(null,user);
-
-})
-module.exports=passport;
+// deserilize the user from the key in the cookies
+passport.deserializeUser(async function (id, done) {
+  const user = await User.findById(id);
+  return done(null, user);
+});
+// check if the user is authenticated
+// passport.checkAuthentication = function (req, res, next) {
+//   if (req.isAuthenticated()) {
+//     return next();
+//   }
+//   return res.redirect("/user/sign-in");
+// };
+// passport.setAuthenticatedUser = function (req, res, next) {
+//   if (req.isAuthenticated()) {
+//     res.locals.user = req.user;
+//   }
+//   next();
+// };
+module.exports = passport;
