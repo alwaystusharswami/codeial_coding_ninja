@@ -1,7 +1,8 @@
 const express=require('express');
 const port=8080;
 const router=express.Router();
-const mongoose=require('./config/mongoose')
+const mongoose=require('./config/mongoose');
+const cookieParser=require('cookie-parser');
 
 // ejs layout with express 
 const expressLayout=require('express-ejs-layouts');
@@ -11,6 +12,8 @@ const app=express();
 
 // middle ware 
 app.use(expressLayout);
+app.use(express.urlencoded());
+app.use(cookieParser());
 
 
 // set view engine 
