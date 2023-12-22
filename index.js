@@ -1,31 +1,45 @@
-const express=require('express');
-const port=8080;
-const router=express.Router();
-const mongoose=require('./config/mongoose');
-const cookieParser=require('cookie-parser');
+const express = require("express");
+const port = 8080;
+const router = express.Router();
+const mongoose = require("./config/mongoose");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const passport = require("passport");
+const passportLocal = require("./config/passport-local-stratergy");
+// ejs layout with express
+const expressLayout = require("express-ejs-layouts");
 
-// ejs layout with express 
-const expressLayout=require('express-ejs-layouts');
+const app = express();
 
-const app=express();
-
-
-// middle ware 
+// middle ware
 app.use(expressLayout);
 app.use(express.urlencoded());
 app.use(cookieParser());
 
+// set view engine
+app.set("view engine", "ejs");
+app.set("views", "views");
 
-// set view engine 
-app.set('view engine','ejs');
-app.set('views','views');
+// passport session
+app.use(
+  session({
+    name: "codieal",
+    secret: "blashsomething", // change secret in deploy in production
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      maxAge: 1000 * 60 * 100,
+    },
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+// router calling
+app.use("/", require("./routes"));
 
-// router calling 
-app.use('/',require('./routes'));
-
-app.listen(port,(err)=>{
-    if(err){
-        console.log(err);
-    }
-    console.log(`server is running up at port ${port}`)
-})
+app.listen(port, (err) => {
+  if (err) {
+    console.log(err);
+  }
+  console.log(`server is running up at port ${port}`);
+});
