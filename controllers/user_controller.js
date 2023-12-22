@@ -8,3 +8,9 @@ module.exports.signin=function(req,res){
         title:"Codieal | Sign in"
     })
 }
+module.exports.create=function(req,res){
+   
+}
+module.exports.createSession=function(req,res){
+    
+}
