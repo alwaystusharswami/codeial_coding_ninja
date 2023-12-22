@@ -1,6 +1,7 @@
 const express=require('express');
 const port=8080;
 const router=express.Router();
+const mongoose=require('./config/mongoose')
 
 // ejs layout with express 
 const expressLayout=require('express-ejs-layouts');
