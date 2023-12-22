@@ -6,6 +6,8 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport-local-stratergy");
+
+const mongoStore=require('connect-mongo');
 // ejs layout with express
 const expressLayout = require("express-ejs-layouts");
 
@@ -31,6 +33,11 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 100,
     },
+    store:new mongoStore({
+      mongoUrl:'mongodb://127.0.0.1:27017/codieal',
+      autoRemove:'disabled'
+
+    })
   })
 );
 
