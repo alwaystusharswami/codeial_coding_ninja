@@ -20,6 +20,12 @@ module.exports.signin = function (req, res) {
     title: "Codieal | Sign in",
   });
 };
+module.exports.signout=function(req,res){
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
+}
 module.exports.create = async function (req, res) {
   if (req.body.password != req.body.confirmpassword) {
     return res.redirect("back");
