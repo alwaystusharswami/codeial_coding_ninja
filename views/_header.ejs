@@ -1,13 +1,19 @@
-<ul>
-  <% if(locals.user){ %>
-  <li><%=user.name%></li>
-  <li><a href="/user/sign-out">Sign Out</a></li>
-  <%}else{%>
-  <li>
-    <a href="/user/sign-in">Sign In</a>
-  </li>
-  <li>
-    <a href="/user/sign-up">Sign up</a>
-  </li>
-  <%}%>
-</ul>
+<head>
+  <link rel="stylesheet" href="/css/header.css">
+</head>
+<body>
+  <ul>
+    <% if(locals.user){ %>
+    <li><a href="/user/profile"><%=user.name%></a></li>
+    <li><a href="/user/sign-out">Sign Out</a></li>
+    <%}else{%>
+    <li>
+      <a href="/user/sign-in">Sign In</a>
+    </li>
+    <li>
+      <a href="/user/sign-up">Sign up</a>
+    </li>
+    <%}%>
+  </ul>
+</body>
+<script src="/js/clg.js"></script>
