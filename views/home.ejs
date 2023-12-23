@@ -1,9 +1,11 @@
 <section id="feed-post">
   <h1>Posts</h1>
+<%if(locals.user){%>
   <form action="/post/create" method="post">
     <textarea name="content" id="content" cols="30" rows="10"></textarea>
     <input type="submit" value="post" />
   </form>
+<%}%>
   <div id="post-list-container">
     <ul>
       <%for(post of posts){%>
