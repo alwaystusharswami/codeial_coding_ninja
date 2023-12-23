@@ -1,13 +1,13 @@
-ul {
+.header-list {
   background-color: lightblue;
   padding: 10px;
   display: flex;
   justify-content: flex-end; }
-  ul li {
+  .header-list li {
     list-style: none;
     margin-right: 20px; }
-  ul a {
+  .header-list a {
     text-decoration: none;
     color: gray; }
-  ul a:hover {
+  .header-list a:hover {
     color: black; }

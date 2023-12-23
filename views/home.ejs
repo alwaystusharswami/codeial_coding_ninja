@@ -4,4 +4,15 @@
     <textarea name="content" id="content" cols="30" rows="10"></textarea>
     <input type="submit" value="post" />
   </form>
+  <div id="post-list-container">
+    <ul>
+      <%for(post of posts){%>
+        <li>
+          <%=post.content%>
+        </li>
+        <small>Created By : <%=post.user.name%></small>
+
+      <%}%>
+    </ul>
+  </div>
 </section>
