@@ -41,5 +41,5 @@ module.exports.create = async function (req, res) {
 };
 module.exports.createSession = function (req, res) {
   console.log(`done`);
-  return res.redirect("/user/profile");
+  return res.redirect("/");
 };
