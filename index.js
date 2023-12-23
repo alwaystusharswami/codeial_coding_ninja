@@ -20,7 +20,7 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 // middle ware
 app.use(expressLayout);
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
