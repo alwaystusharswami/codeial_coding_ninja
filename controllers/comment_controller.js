@@ -14,3 +14,13 @@ module.exports.create = async function (req, res) {
   }
   return res.redirect("/");
 };
+module.exports.destroy = async function (req, res) {
+  const comment = await Comment.findById(req.params.id).exec();
+  if (comment.user == req.user.id) {
+    let postId = comment.post;
+    await comment.deleteOne();
+    const post = await Post.findById(postId).exec();
+    post.comments.pull({ _id: req.params.id });
+  }
+  return res.redirect("back");
+};
