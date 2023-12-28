@@ -1,6 +1,6 @@
 const express = require("express");
 const port = 8080;
-const path=require('path');
+const path = require("path");
 const router = express.Router();
 const mongoose = require("./config/mongoose");
 const cookieParser = require("cookie-parser");
@@ -22,8 +22,8 @@ app.set("views", "views");
 app.use(expressLayout);
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.set('layout extractStyles',true);
-app.set('layout extractScripts',true);
+app.set("layout extractStyles", true);
+app.set("layout extractScripts", true);
 
 // passport session
 app.use(
@@ -56,7 +56,7 @@ app.use(
     prefix: "/css",
   })
 );
-app.use(express.static(path.resolve(__dirname+'/assets')));
+app.use(express.static(path.resolve(__dirname + "/assets")));
 
 // router calling
 app.use("/", require("./routes"));

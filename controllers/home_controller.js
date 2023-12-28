@@ -8,9 +8,8 @@ module.exports.home = async function (req, res) {
       populate: {
         path: "user",
       },
-    }).exec();
-  console.log(posts);
-  // res.send(posts);
+    })
+    .exec();
 
   return res.render("home", { title: "Codieal Home", posts });
 };
