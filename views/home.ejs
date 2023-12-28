@@ -1,38 +1,44 @@
 <section id="feed-post">
   <h1>Posts</h1>
   <%if(locals.user){%>
-  <form action="/post/create" method="post">
-    <textarea name="content" id="content" cols="30" rows="10"></textarea>
-    <input type="submit" value="post" />
-  </form>
-  <%}%>
-  <div id="post-list-container">
-    <ul>
-      <%for(post of posts){%>
-      <li><%=post.content%></li>
-      <small>Created By : <%=post.user.name%></small>
-      <div class="post-comments">
-        <%if(locals.user){%>
-        <form action="/comment/create" method="post">
-          <input
-            type="text"
-            name="content"
-            id="content"
-            placeholder="Your Comment"
-          />
-          <input type="hidden" name="post" value="<%=post.id%>" />
-          <input type="submit" value="Add Comment" />
-        </form>
-        <%}%>
-        <div>
-          <%for(comment of post.comments){%>
-          <p><%=comment.comment%></p>
-          <small>Created by : <%=comment.user.name%></small>
-          <%}%>
-        </div>
-      </div>
+    <form action="/post/create" method="post">
+      <textarea name="content" id="content" cols="30" rows="10"></textarea>
+      <input type="submit" value="post" />
+    </form>
+    <%}%>
+      <div id="post-list-container">
+        <ul>
+          <%for(post of posts){%>
+            <li>
+              <p>
+                <%if(locals.user && locals.user.id==post.user.id){%>
+                  <small>
+                    <a href="post/destroy/<%=post.id%>">X</a>
+                  </small>
+                <%}%>
+              </p>
+              <%=post.content%>
+                <small>Created By : <%=post.user.name%></small>
+            </li>
+            <div class="post-comments">
+              <%if(locals.user){%>
+                <form action="/comment/create" method="post">
+                  <input type="text" name="content" id="content" placeholder="Your Comment" />
+                  <input type="hidden" name="post" value="<%=post.id%>" />
+                  <input type="submit" value="Add Comment" />
+                </form>
+                <%}%>
+                  <div>
+                    <%for(comment of post.comments){%>
+                      <p>
+                        <%=comment.comment%>
+                      </p>
+                      <small>Created by : <%=comment.user.name%></small>
+                      <%}%>
+                  </div>
+            </div>
 
-      <%}%>
-    </ul>
-  </div>
+            <%}%>
+        </ul>
+      </div>
 </section>
