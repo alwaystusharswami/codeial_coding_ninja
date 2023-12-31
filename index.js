@@ -7,7 +7,11 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport-local-stratergy");
+// sass middleware 
 const sassMiddleWare = require("node-sass-middleware");
+// flash messge
+const flash=require('connect-flash');
+const customflashMiddleWare=require('./config/flashMiddleware');
 
 const mongoStore = require("connect-mongo");
 // ejs layout with express
@@ -45,7 +49,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
-
+// flash message connect 
+app.use(flash());
+app.use(customflashMiddleWare.setFlash);
 // sass middleware use
 app.use(
   sassMiddleWare({

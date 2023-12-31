@@ -64,6 +64,7 @@ module.exports.signout = function (req, res) {
       if (err) {
         return next(err);
       }
+      req.flash("success", "Logged Out");
       res.redirect("/");
     });
   } catch (error) {
@@ -91,6 +92,7 @@ module.exports.create = async function (req, res) {
 };
 module.exports.createSession = function (req, res) {
   try {
+    req.flash("success", "Logged in Successfully");
     return res.redirect("/");
   } catch (error) {
     console.log(`error in user controller ${error} `);
