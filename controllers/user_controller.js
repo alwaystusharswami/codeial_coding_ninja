@@ -2,8 +2,6 @@ const User = require("../models/user");
 
 module.exports.profile = async function (req, res) {
   const user = await User.findById(req.params.id);
-  console.log(user);
-
   return res.render("user-profile", {
     title: `${user.name} profile`,
     profileUser: user,
