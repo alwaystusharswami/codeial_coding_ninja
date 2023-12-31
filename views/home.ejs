@@ -1,33 +1,26 @@
 <section id="feed-post">
   <h1>Posts</h1>
   <%if(locals.user){%>
-    <form action="/post/create" method="post">
-      <textarea name="content" id="content" cols="30" rows="10"></textarea>
-      <input type="submit" value="post" />
-    </form>
-    <%}%>
-      <div id="post-list-container">
-        <ul>
-          <%for(post of posts){%>
-            <li>
-              <%-include('_post.ejs')%>
-            </li>
-            <div class="post-comments">
-              <%if(locals.user){%>
-                <form action="/comment/create" method="post">
-                  <input type="text" name="content" id="content" placeholder="Your Comment" />
-                  <input type="hidden" name="post" value="<%=post.id%>" />
-                  <input type="submit" value="Add Comment" />
-                </form>
-                <%}%>
-                  <div>
-                   <li>
-                    <%-include('_comment.ejs')%>
-                   </li>
-                  </div>
-            </div>
+  <form action="/post/create" method="post">
+    <textarea name="content" id="content" cols="30" rows="10"></textarea>
+    <input type="submit" value="post" />
+  </form>
+  <%}%>
+  <div id="post-list-container">
+    <ul>
+      <%for(post of posts){%>
+      <li><%-include('_post.ejs')%></li>
 
-            <%}%>
-        </ul>
-      </div>
+      <%}%>
+    </ul>
+  </div>
+</section>
+<section id="user-friends">
+  <h4>friends</h4>
+  <%for(u of allUsers){%>
+    <p>
+      <a href="/user/profile/<%=u.id%>"> <%=u.name%></a>
+    </p>
+  <%}%>
+  
 </section>

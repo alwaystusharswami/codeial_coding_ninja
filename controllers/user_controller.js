@@ -1,31 +1,38 @@
 const User = require("../models/user");
 
-module.exports.profile = function (req, res) {
-  console.log(req.cookies);
-  return res.render("profile", { title: "Codieal profile" });
+module.exports.profile = async function (req, res) {
+  const user = await User.findById(req.params.id);
+  console.log(user);
+
+  return res.render("user-profile", {
+    title: `${user.name} profile`,
+    profileUser: user,
+  });
 };
 module.exports.signup = function (req, res) {
-  if(req.isAuthenticated()){
-    return res.redirect('/user/profile');
+  if (req.isAuthenticated()) {
+    return res.redirect("/user/profile");
   }
   return res.render("user_sign_up", {
     title: "Codieal | Sign Up",
   });
 };
 module.exports.signin = function (req, res) {
-  if(req.isAuthenticated()){
-    return res.redirect('/user/profile');
+  if (req.isAuthenticated()) {
+    return res.redirect("/user/profile");
   }
   return res.render("user_sign_in", {
     title: "Codieal | Sign in",
   });
 };
-module.exports.signout=function(req,res){
-  req.logout(function(err) {
-    if (err) { return next(err); }
-    res.redirect('/');
+module.exports.signout = function (req, res) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
   });
-}
+};
 module.exports.create = async function (req, res) {
   if (req.body.password != req.body.confirmpassword) {
     return res.redirect("back");

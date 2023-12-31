@@ -1,7 +1,12 @@
 <%if(locals.user && locals.user.id==post.user.id){%>
-    <small>
-      <a href="post/destroy/<%=post.id%>">X</a>
-    </small>
-    <%}%>
-      <%=post.content%>
-        <small>Created By : <%=post.user.name%></small>
+<small>
+  <a href="post/destroy/<%=post.id%>">X</a>
+</small>
+<%}%> <%=post.content%>
+<small>Created By : <%=post.user.name%></small>
+<div class="post-comments">
+  <li>
+  <%-include('_comment.ejs')%>
+
+  </li>
+  </div>
