@@ -1,0 +1,7 @@
+<%for(comment of post.comments){%>
+<br />
+<%if(locals.user && locals.user.id==comment.user.id){%>
+<small><a href="/comment/destroy/<%=comment.id%>">X</a></small>
+<%}%> <%=comment.comment%>
+<small>Created by : <%=comment.user.name%></small>
+<%}%>

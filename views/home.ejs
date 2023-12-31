@@ -10,13 +10,7 @@
         <ul>
           <%for(post of posts){%>
             <li>
-              <%if(locals.user && locals.user.id==post.user.id){%>
-                <small>
-                  <a href="post/destroy/<%=post.id%>">X</a>
-                </small>
-                <%}%>
-                  <%=post.content%>
-                    <small>Created By : <%=post.user.name%></small>
+              <%-include('_post.ejs')%>
             </li>
             <div class="post-comments">
               <%if(locals.user){%>
@@ -27,14 +21,9 @@
                 </form>
                 <%}%>
                   <div>
-                    <%for(comment of post.comments){%>
-                      <br>
-                      <%if(locals.user && locals.user.id==comment.user.id){%>
-                        <small><a href="/comment/destroy/<%=comment.id%>">X</a></small>
-                        <%}%>
-                          <%=comment.comment%>
-                            <small>Created by : <%=comment.user.name%></small>
-                            <%}%>
+                   <li>
+                    <%-include('_comment.ejs')%>
+                   </li>
                   </div>
             </div>
 
