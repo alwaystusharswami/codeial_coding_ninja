@@ -1,6 +1,16 @@
 const User = require("../models/user");
-
-module.exports.profile = async function (req, res) {
+module.exports.update = async function (req, res) {
+  if(req.user.id==req.params.id){
+  await User.findByIdAndUpdate(req.params.id, req.body);
+  }
+  console.log(req.body)
+  console.log('update')
+  return res.redirect("back");
+};
+module.exports.profile = function (req, res) {
+  return res.render("profile", { title: "Profile page" });
+};
+module.exports.userprofile = async function (req, res) {
   const user = await User.findById(req.params.id);
   return res.render("user-profile", {
     title: `${user.name} profile`,
