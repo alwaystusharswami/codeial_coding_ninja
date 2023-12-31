@@ -1,60 +1,99 @@
 const User = require("../models/user");
 module.exports.update = async function (req, res) {
-  if(req.user.id==req.params.id){
-  await User.findByIdAndUpdate(req.params.id, req.body);
+  try {
+    if (req.user.id == req.params.id) {
+      await User.findByIdAndUpdate(req.params.id, req.body);
+    }
+    console.log(req.body);
+    console.log("update");
+    return res.redirect("back");
+  } catch (error) {
+    console.log(`error in user controller ${error} `);
+    return;
   }
-  console.log(req.body)
-  console.log('update')
-  return res.redirect("back");
 };
 module.exports.profile = function (req, res) {
-  return res.render("profile", { title: "Profile page" });
+  try {
+    return res.render("profile", { title: "Profile page" });
+  } catch (error) {
+    console.log(`error in user controller ${error} `);
+    return;
+  }
 };
 module.exports.userprofile = async function (req, res) {
-  const user = await User.findById(req.params.id);
-  return res.render("user-profile", {
-    title: `${user.name} profile`,
-    profileUser: user,
-  });
+  try {
+    const user = await User.findById(req.params.id);
+    return res.render("user-profile", {
+      title: `${user.name} profile`,
+      profileUser: user,
+    });
+  } catch (error) {
+    console.log(`error in user controller ${error} `);
+    return;
+  }
 };
 module.exports.signup = function (req, res) {
-  if (req.isAuthenticated()) {
-    return res.redirect("/user/profile");
+  try {
+    if (req.isAuthenticated()) {
+      return res.redirect("/user/profile");
+    }
+    return res.render("user_sign_up", {
+      title: "Codieal | Sign Up",
+    });
+  } catch (error) {
+    console.log(`error in user controller ${error} `);
+    return;
   }
-  return res.render("user_sign_up", {
-    title: "Codieal | Sign Up",
-  });
 };
 module.exports.signin = function (req, res) {
-  if (req.isAuthenticated()) {
-    return res.redirect("/user/profile");
+  try {
+    if (req.isAuthenticated()) {
+      return res.redirect("/user/profile");
+    }
+    return res.render("user_sign_in", {
+      title: "Codieal | Sign in",
+    });
+  } catch (error) {
+    console.log(`error in user controller ${error} `);
+    return;
   }
-  return res.render("user_sign_in", {
-    title: "Codieal | Sign in",
-  });
 };
 module.exports.signout = function (req, res) {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/");
-  });
+  try {
+    req.logout(function (err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/");
+    });
+  } catch (error) {
+    console.log(`error in user controller ${error} `);
+    return;
+  }
 };
 module.exports.create = async function (req, res) {
-  if (req.body.password != req.body.confirmpassword) {
-    return res.redirect("back");
-  }
-  const user = await User.findOne({ email: req.body.email });
+  try {
+    if (req.body.password != req.body.confirmpassword) {
+      return res.redirect("back");
+    }
+    const user = await User.findOne({ email: req.body.email });
 
-  if (!user) {
-    User.create(req.body);
-    return res.redirect("/user/sign-in");
-  } else {
-    return res.redirect("back");
+    if (!user) {
+      User.create(req.body);
+      return res.redirect("/user/sign-in");
+    } else {
+      return res.redirect("back");
+    }
+  } catch (error) {
+    console.log(`error in user controller ${error} `);
+    return;
   }
 };
 module.exports.createSession = function (req, res) {
-  console.log(`done`);
-  return res.redirect("/");
+  try {
+    return res.redirect("/");
+  } catch (error) {
+    console.log(`error in user controller ${error} `);
+    return;
+  }
 };
